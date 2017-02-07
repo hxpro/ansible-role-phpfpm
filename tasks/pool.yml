@@ -1,0 +1,23 @@
+---
+- name: Delete pool
+  file:
+    path="/etc/php-fpm.d/{{ pool.name }}.conf"
+    state=absent
+  when: pool.absent is defined
+
+- name: Check pools variables
+  assert:
+    that:
+      - pool.listen is defined
+      - pool.pm is defined
+    msg: "Check your pool definition."
+  when: pool.absent is not defined
+
+- name: "Configuration for php-fpm pool {{ pool.name }}"
+  template:
+    owner={{ phpfpm_user }}
+    group={{ phpfpm_group }}
+    src="pool.conf.j2"
+    dest="/etc/php-fpm.d/{{ pool.name }}.conf"
+  when: pool.absent is not defined
+  notify: reload php-fpm

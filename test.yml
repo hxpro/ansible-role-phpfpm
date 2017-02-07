@@ -1,0 +1,74 @@
+---
+- name: prepare container for test
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Create container centos7
+      docker_container:
+        name: centos7
+        image: hxpro/docker-centos
+#        recreate: yes
+        privileged: true
+        command: /usr/sbin/init
+        volumes:
+          - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+        state: started
+      tags: always
+
+    - name: add centos7 host
+      add_host: name=centos7 groups=containers
+      tags: always 
+
+- name: provision role
+  hosts: containers
+  connection: docker
+  vars:
+    phpfpm_user: apache
+    phpfpm_group: apache
+    phpfpm_pid: /var/run/php-fpm.pid
+    phpfpm_pools:
+      - name: www
+        absent:
+      - name: ondemand
+        listen:
+          address: '127.0.0.1:9002'
+        pm:
+          ondemand:
+          start_servers: 10
+      - name: www2
+        description: "This is the test of static pool"
+        listen:
+          address: '127.0.0.1:9000'
+        pm:
+          static:
+        ping:
+      - name: test
+        listen:
+          address: '127.0.0.1:9001'
+        pm:
+          dynamic:
+          max_children: 200
+          start_servers: 35
+          min_spare_servers: 35
+          max_spare_servers: 120
+  roles:
+    - role: "{{ playbook_dir }}"
+
+  handlers:
+    - name: reload php-fpm
+      service: name=php-fpm state=reloaded
+
+#- name: tear down
+#  hosts: localhost
+#  gather_facts: no
+#  connection: local
+#
+#  tasks:
+#    - name: Destroy containers
+#      docker_container:
+#        name: '{{ item }}'
+#        state: absent
+#      with_items:
+#        - centos7

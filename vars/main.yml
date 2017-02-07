@@ -1,0 +1,27 @@
+---
+phpfpm_pkg:
+  - php-fpm
+  - php-opcache
+  - php-cli
+  - php-xml
+  - php-common
+  - php-mysqlnd
+  - php-gd
+  - php-pear
+  - php-mcrypt
+  - php-soap
+  - php-mbstring
+  - php-pdo
+  - php-process
+  - gettext
+
+phpfpm_supported_versions:
+  - 70
+  - 71
+
+phpfpm_allowed_log_levels:
+  - alert
+  - error
+  - warning
+  - notice
+  - debug
