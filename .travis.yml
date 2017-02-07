@@ -15,9 +15,10 @@ addons:
 install:
   - pip install ansible
   - ansible --version
+  - ansible-galaxy install hxpro.epel
 
 script:
-  - ansible-playbook test.yml -i tests/inventory
+  - ansible-playbook test.yml -i inventory
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
