@@ -13,9 +13,8 @@ addons:
     - python-pip
 
 install:
-  - pip install ansible
-  - pip install docker-py
-  - ansible --version
+  - sudo pip install ansible
+  - sudo pip install docker-py==1.9.0
   - ansible-galaxy install hxpro.epel
 
 script:
