@@ -1,6 +1,8 @@
 hxpro.phpfpm
 ============
 
+![travis-ci](https://travis-ci.org/hxpro/ansible-role-phpfpm.svg?branch=master)
+
 Install and configure php-fpm.
 
 This role is under development. Use it on your own risk. Pull requests are welcome.
