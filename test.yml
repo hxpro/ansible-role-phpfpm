@@ -9,7 +9,7 @@
       docker_container:
         name: centos7
         image: hxpro/docker-centos
-#        recreate: yes
+        recreate: yes
         privileged: true
         command: /usr/sbin/init
         volumes:
@@ -40,7 +40,7 @@
       - name: www2
         description: "This is the test of static pool"
         listen:
-          address: '127.0.0.1:9000'
+          address: '127.0.0.1:9003'
         pm:
           static:
         ping:

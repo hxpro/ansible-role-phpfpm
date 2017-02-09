@@ -18,7 +18,7 @@ install:
   - ansible-galaxy install hxpro.epel
 
 script:
-  - ansible-playbook test.yml -i inventory
+  - ansible-playbook test.yml
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

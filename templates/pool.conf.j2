@@ -39,7 +39,7 @@ ping.response = {{ pool.ping.response | default('pong') }}
 
 {% if pool.request_slowlog_timeout is defined %}
 request_slowlog_timeout = {{ pool.request_slowlog_timeout }}
-slowlog = {{ pool.slowlog | default(log_path+pool.name+"-slow.log") }}
+slowlog = {{ pool.slowlog | default(phpfpm_log_path+pool.name+"-slow.log") }}
 {% endif %}
 
 ;request_terminate_timeout = 0
