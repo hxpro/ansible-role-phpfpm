@@ -1,7 +1,7 @@
 ---
 - name: Delete pool
   file:
-    path="/etc/php-fpm.d/{{ pool.name }}.conf"
+    path="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
     state=absent
   when: pool.absent is defined
 
@@ -18,6 +18,6 @@
     owner={{ phpfpm_user }}
     group={{ phpfpm_group }}
     src="pool.conf.j2"
-    dest="/etc/php-fpm.d/{{ pool.name }}.conf"
+    dest="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
   when: pool.absent is not defined
   notify: reload php-fpm

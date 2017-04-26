@@ -1,21 +1,21 @@
 ---
 phpfpm_pkg:
-  - php-fpm
-  - php-opcache
-  - php-cli
-  - php-xml
-  - php-common
-  - php-mysqlnd
-  - php-gd
-  - php-pear
-  - php-mcrypt
-  - php-soap
-  - php-mbstring
-  - php-pdo
-  - php-process
-  - gettext
+  - fpm
+  - opcache
+  - cli
+  - xml
+  - common
+  - mysqlnd
+  - gd
+  - pear
+  - mcrypt
+  - soap
+  - mbstring
+  - pdo
+  - process
 
 phpfpm_supported_versions:
+  - 56
   - 70
   - 71
 

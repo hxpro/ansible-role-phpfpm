@@ -7,19 +7,26 @@
       - phpfpm_pools is defined
     msg: "Please read the role documentation, if you still cannot understand why role failed, add your issue."
 
+- name: Read version specific variables
+  include_vars: "{{ phpfpm_version }}.yml"
+
 - name: Install remi-repo
   package: name=https://rpms.remirepo.net/enterprise/remi-release-7.rpm state=installed
   when: ansible_distribution == 'CentOS'
 
-- name: "Enable remi-php{{ phpfpm_version }}"
-  ini_file:
-    dest="/etc/yum.repos.d/remi-php{{ phpfpm_version }}.repo"
-    section="remi-php{{ phpfpm_version }}"
-    option=enabled
-    value=1
+- name: Install php extensions
+  package: name="php{{phpfpm_version}}-php-{{ item }}" state=latest
+  with_items: "{{ phpfpm_pkg }}"
 
-- name: Install php packages
-  package: name={{ phpfpm_pkg }} state=latest
+- name: Install other packages
+  package: name={{ item }} state=latest
+  with_items:
+    - gettext
+
+- name: Log directory
+  file:
+    name={{ phpfpm_log_path }}
+    state=directory
 
 - name: php-fpm.d pool
   include: pool.yml
@@ -28,9 +35,9 @@
     loop_var: pool
 
 - name: php-fpm.conf
-  template: src=php-fpm.conf.j2 dest="/etc/php-fpm.conf"
-    validate="php-fpm -t -c %s"
+  template: src=php-fpm.conf.j2 dest="{{ phpfpm_etc }}/php-fpm.conf"
+    validate="/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
   notify: reload php-fpm
 
 - name: Start/enable php-fpm service
-  service: name=php-fpm enabled=yes state=started
+  service: name="php{{ phpfpm_version }}-php-fpm" enabled=yes state=started

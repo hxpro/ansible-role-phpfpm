@@ -1,12 +1,12 @@
 ---
 phpfpm_version: 70
 
-phpfpm_pid: "/run/php-fpm/php-fpm.pid"
+phpfpm_pid: "/run/php-fpm{{ phpfpm_version }}.pid"
 
 phpfpm_user: "apache"
 phpfpm_group: "apache"
-phpfpm_log_path: "/var/log/php-fpm/"
-phpfpm_error_log: "/var/log/php-fpm/error.log"
+phpfpm_log_path: "/var/log/php-fpm{{ phpfpm_version }}/"
+phpfpm_error_log: "{{ phpfpm_log_path }}/error.log"
 phpfpm_log_level: "notice"
 
 phpfpm_emergency_restart_threshold: 0
@@ -29,7 +29,7 @@ phpfpm_pools:
     group: apache
 
     request_slowlog_timeout: 10
-    slowlog: "/var/log/php-fpm/www-slow.log"
+    slowlog: "{{ phpfpm_log_path }}/www-slow.log"
     request_terminate_timeout: 0
     rlimit_files: 1024
     rlimit_core: 0
@@ -50,7 +50,7 @@ phpfpm_pools:
       TMPDIR: "/tmp"
 
     listen:
-      address: '127.0.0.1:9000'
+      address: '127.0.0.1:90{{ phpfpm_version }}'
       allowed_clients: '127.0.0.1'
 
     # Process Manager settings

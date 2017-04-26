@@ -2,7 +2,7 @@
 
 {# All relative paths in this configuration file are relative to PHP's install prefix. #}
 
-include=/etc/php-fpm.d/*.conf
+include={{ phpfpm_etc }}/php-fpm.d/*.conf
 
 [global]
 pid = {{ phpfpm_pid }}

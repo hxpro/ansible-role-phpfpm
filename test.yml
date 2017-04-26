@@ -9,7 +9,7 @@
       docker_container:
         name: centos7
         image: hxpro/docker-centos
-        recreate: yes
+        #        recreate: yes
         privileged: true
         command: /usr/sbin/init
         volumes:
@@ -27,26 +27,27 @@
   vars:
     phpfpm_user: apache
     phpfpm_group: apache
-    phpfpm_pid: /var/run/php-fpm.pid
+#    phpfpm_pid: /var/run/php-fpm.pid
+    phpfpm_version: 70
     phpfpm_pools:
       - name: www
         absent:
       - name: ondemand
         listen:
-          address: '127.0.0.1:9002'
+          address: '127.0.0.1:9001'
         pm:
           ondemand:
           start_servers: 10
       - name: www2
         description: "This is the test of static pool"
         listen:
-          address: '127.0.0.1:9003'
+          address: '127.0.0.1:9002'
         pm:
           static:
         ping:
       - name: test
         listen:
-          address: '127.0.0.1:9001'
+          address: '127.0.0.1:9003'
         pm:
           dynamic:
           max_children: 200
