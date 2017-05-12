@@ -20,4 +20,4 @@
     src="pool.conf.j2"
     dest="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
   when: pool.absent is not defined
-  notify: reload php-fpm
+  notify: restart php-fpm
