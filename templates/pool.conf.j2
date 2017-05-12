@@ -6,6 +6,15 @@ user = {{ pool.user | default(phpfpm_user) }}
 group = {{ pool.group | default(phpfpm_group) }}
 listen = {{ pool.listen.address | mandatory }}
 listen.allowed_clients = {{ pool.listen.allowed_clients | default('127.0.0.1') }}
+{% if pool.listen.owner is defined %}
+listen.owner = {{ pool.listen.owner }}
+{% endif %}
+{% if pool.listen.group is defined %}
+listen.group = {{ pool.listen.group }}
+{% endif %}
+{% if pool.listen.mode is defined %}
+listen.mode = {{ pool.listen.mode }}
+{% endif %}
 
 {% if pool.pm.static is defined %}
 pm = static
