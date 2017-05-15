@@ -74,6 +74,12 @@ php_admin_value[{{ admin_value }}] = {{ pool.php_admin_value[admin_value] }}
 {% endfor %}
 {% endif %}
 
+{% if pool.php_admin_flag is defined %}
+{% for admin_flag in pool.php_admin_flag %}
+php_admin_flag[{{ admin_flag }}] = {{ pool.php_admin_flag[admin_flag] }}
+{% endfor %}
+{% endif %}
+
 {% if pool.php_flag is defined %}
 {% for flag in pool.php_flag %}
 php_flag[{{ flag }}] = {{ pool.php_flag[flag] }}
