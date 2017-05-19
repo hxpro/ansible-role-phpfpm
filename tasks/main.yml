@@ -27,6 +27,13 @@
   file:
     name={{ phpfpm_log_path }}
     state=directory
+    setype=httpd_log_t
+
+- sefcontext:
+    target: '{{ phpfpm_log_path }}(/.*)?'
+    setype: httpd_log_t
+    state: present
+  when: selinux
 
 - name: php-fpm.d pool
   include: pool.yml

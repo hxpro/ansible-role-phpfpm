@@ -13,6 +13,13 @@
     msg: "Check your pool definition."
   when: pool.absent is not defined
 
+- seport:
+    ports: "{{ pool.listen.address.split(':')[1]|int }}"
+    proto: tcp
+    setype: http_port_t
+    state: "{{ 'present' if pool.absent is not defined else 'absent' }}"
+  when: selinux and pool.absent is not defined and pool.listen.address.split(':')[0] | ipaddr
+
 - name: "Configuration for php-fpm pool {{ pool.name }}"
   template:
     owner={{ phpfpm_user }}
