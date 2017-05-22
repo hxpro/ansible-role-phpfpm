@@ -38,6 +38,7 @@
 - seboolean:
     name: httpd_can_network_connect_db
     state: yes
+    persistent: yes
   when: selinux
 
 - name: php-fpm.d pool
