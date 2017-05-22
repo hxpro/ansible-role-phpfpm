@@ -35,6 +35,11 @@
     state: present
   when: selinux
 
+- seboolean:
+    name: httpd_can_network_connect_db
+    state: yes
+  when: selinux
+
 - name: php-fpm.d pool
   include: pool.yml
   with_items: "{{ phpfpm_pools }}"
