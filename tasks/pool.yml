@@ -32,4 +32,4 @@
 - name: set phpfpm_default_listen
   set_fact:
     phpfpm_default_listen: "{{ pool.listen.address }}"
-  when: pool.absent is not defined and pool.name is equalto www
+  when: pool.absent is not defined and pool.name is equalto 'www'
