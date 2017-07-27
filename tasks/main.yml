@@ -52,5 +52,13 @@
     validate="/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
   notify: restart php-fpm
 
+- name: Set timezone - php.ini
+  ini_file:
+    path: "{{ phpfpm_etc }}/php.ini"
+    section: Date
+    option: date.timezone
+    value: "{{ phpfpm_timezone }}"
+  notify: restart php-fpm
+
 - name: Start/enable php-fpm service
   systemd: name="php{{ phpfpm_version }}-php-fpm" enabled=yes state=started daemon_reload=yes

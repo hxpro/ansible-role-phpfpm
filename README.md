@@ -16,6 +16,7 @@ Role Variables
 --------------
 ```
 phpfpm_version: 70
+phpfpm_timezone: Europe/Prague
 
 phpfpm_pid: "/run/php-fpm/php-fpm.pid"
 
