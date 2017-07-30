@@ -21,7 +21,7 @@
       add_host: name=centos7 groups=containers
       tags: always 
 
-- name: provision role
+- name: php70
   hosts: containers
   connection: docker
   vars:
@@ -29,37 +29,9 @@
     phpfpm_group: apache
 #    phpfpm_pid: /var/run/php-fpm.pid
     phpfpm_version: 70
-    phpfpm_pools:
-      - name: www
-        absent:
-      - name: ondemand
-        listen:
-          address: '127.0.0.1:9001'
-        pm:
-          ondemand:
-          start_servers: 10
-      - name: www2
-        description: "This is the test of static pool"
-        listen:
-          address: '127.0.0.1:9002'
-        pm:
-          static:
-        ping:
-      - name: test
-        listen:
-          address: '127.0.0.1:9003'
-        pm:
-          dynamic:
-          max_children: 200
-          start_servers: 35
-          min_spare_servers: 35
-          max_spare_servers: 120
   roles:
     - role: "{{ playbook_dir }}"
 
-  handlers:
-    - name: reload php-fpm
-      service: name=php-fpm state=reloaded
 
 #- name: tear down
 #  hosts: localhost
