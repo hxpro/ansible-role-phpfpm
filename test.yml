@@ -29,6 +29,13 @@
     phpfpm_group: apache
 #    phpfpm_pid: /var/run/php-fpm.pid
     phpfpm_version: 70
+    phpfpm_ini:
+      - option: short_open_tag
+        value: 'On'
+      - section: Date
+        option: date.timezone
+        value: Europe/Prague
+
   roles:
     - role: "{{ playbook_dir }}"
 

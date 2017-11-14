@@ -52,12 +52,14 @@
     validate="/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
   notify: restart php-fpm
 
-- name: Set timezone - php.ini
+- name: Customize php.ini
   ini_file:
     path: "{{ phpfpm_etc }}/php.ini"
-    section: Date
-    option: date.timezone
-    value: "{{ phpfpm_timezone }}"
+    section: "{{ item.section | default('PHP') }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  state: "{{ item.state | default present }}"
+  with_items: "{{ phpfpm_ini }}"
   notify: restart php-fpm
 
 - name: Start/enable php-fpm service

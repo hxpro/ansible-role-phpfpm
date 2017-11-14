@@ -16,7 +16,13 @@ Role Variables
 --------------
 ```
 phpfpm_version: 70
-phpfpm_timezone: Europe/Prague
+phpfpm_ini:
+  - section: PHP
+    option: short_open_tag
+    value: 'On'
+  - section: Date
+    option: date.timezone
+    value: Europe/Prague
 
 phpfpm_pid: "/run/php-fpm/php-fpm.pid"
 
