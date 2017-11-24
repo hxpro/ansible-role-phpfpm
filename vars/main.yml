@@ -13,6 +13,7 @@ phpfpm_pkg:
   - mbstring
   - pdo
   - process
+  - pecl-zip
 
 phpfpm_supported_versions:
   - 56
