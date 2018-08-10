@@ -1,5 +1,20 @@
 ---
 phpfpm_version: 70
+phpfpm_pkg:
+  - fpm
+  - opcache
+  - cli
+  - xml
+  - common
+  - mysqlnd
+  - gd
+  - pear
+  - soap
+  - mbstring
+  - pdo
+  - process
+  - pecl-zip
+
 phpfpm_ini: []
 
 phpfpm_pid: "/run/php-fpm{{ phpfpm_version }}.pid"

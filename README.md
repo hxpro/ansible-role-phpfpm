@@ -16,6 +16,22 @@ Role Variables
 --------------
 ```
 phpfpm_version: 70
+phpfpm_pkg:
+  - fpm
+  - opcache
+  - cli
+  - xml
+  - common
+  - mysqlnd
+  - gd
+  - pear
+  - mcrypt
+  - soap
+  - mbstring
+  - pdo
+  - process
+  - pecl-zip
+
 phpfpm_ini:
   - section: PHP
     option: short_open_tag

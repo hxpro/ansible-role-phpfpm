@@ -1,24 +1,10 @@
 ---
-phpfpm_pkg:
-  - fpm
-  - opcache
-  - cli
-  - xml
-  - common
-  - mysqlnd
-  - gd
-  - pear
-  - mcrypt
-  - soap
-  - mbstring
-  - pdo
-  - process
-  - pecl-zip
-
 phpfpm_supported_versions:
   - 56
   - 70
   - 71
+  - 72
+  - 73
 
 phpfpm_allowed_log_levels:
   - alert
