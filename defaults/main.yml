@@ -29,7 +29,7 @@ phpfpm_emergency_restart_threshold: 0
 phpfpm_emergency_restart_interval: 0
 phpfpm_process_control_timeout: 0
 
-phpfpm_process_max: 128
+phpfpm_process_max: 0
 phpfpm_process_priority:
 
 phpfpm_daemonize: yes

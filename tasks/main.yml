@@ -42,7 +42,7 @@
   when: selinux
 
 - name: php-fpm.d pool
-  include_tasks: pool.yml
+  include_tasks: "{{ role_path }}/tasks/pool.yml"
   with_items: "{{ phpfpm_pools }}"
   loop_control:
     loop_var: pool
