@@ -32,11 +32,17 @@
     - gettext
   tags: setup
 
+- name: Home directory for apache user that create php-fpm package
+  file:
+    name: /usr/share/httpd
+    state: directory
+  tags: setup
+
 - name: Log directory
   file:
-    name={{ phpfpm_log_path }}
-    state=directory
-    setype=httpd_log_t
+    name: {{ phpfpm_log_path }}
+    state: directory
+    setype: httpd_log_t
   tags: setup
 
 - sefcontext:
