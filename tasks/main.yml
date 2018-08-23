@@ -40,7 +40,7 @@
 
 - name: Log directory
   file:
-    name: {{ phpfpm_log_path }}
+    name: "{{ phpfpm_log_path }}"
     state: directory
     setype: httpd_log_t
   tags: setup
