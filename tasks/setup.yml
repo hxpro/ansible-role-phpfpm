@@ -1,0 +1,43 @@
+---
+- name: Install remi-repo
+  package: name=https://rpms.remirepo.net/enterprise/remi-release-7.rpm state=installed
+  when: ansible_distribution == 'CentOS'
+
+- name: Install php extensions
+  package: name="php{{phpfpm_version}}-php-{{ item }}" state=latest
+  with_items: "{{ phpfpm_pkg }}"
+
+- name: Install other packages
+  package: name={{ item }} state=latest
+  with_items:
+    - gettext
+
+- name: Home directory for apache user that create php-fpm package
+  file:
+    name: /usr/share/httpd
+    state: directory
+
+- name: Log directory
+  file:
+    name: "{{ phpfpm_log_path }}"
+    state: directory
+    setype: httpd_log_t
+
+- sefcontext:
+    target: '{{ phpfpm_log_path }}(/.*)?'
+    setype: httpd_log_t
+    state: present
+  when: selinux
+
+- seboolean:
+    name: httpd_can_network_connect_db
+    state: yes
+    persistent: yes
+  when: selinux
+
+- name: Start/enable php-fpm service
+  systemd:
+    name: "php{{ phpfpm_version }}-php-fpm"
+    enabled: yes
+    state: started
+    daemon_reload: yes
