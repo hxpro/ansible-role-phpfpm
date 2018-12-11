@@ -12,6 +12,12 @@
   with_items:
     - gettext
 
+- name: Composer
+  get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /usr/local/bin/composer
+    mode: 0755
+
 - name: Home directory for apache user that create php-fpm package
   file:
     name: /usr/share/httpd
