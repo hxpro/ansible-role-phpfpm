@@ -35,13 +35,13 @@
     target: '{{ phpfpm_log_path }}(/.*)?'
     setype: httpd_log_t
     state: present
-  when: selinux
+  when: selinux|bool
 
 - seboolean:
     name: httpd_can_network_connect_db
     state: yes
     persistent: yes
-  when: selinux
+  when: selinux|bool
 
 - name: Start/enable php-fpm service
   systemd:
