@@ -19,7 +19,7 @@
     value: "1"
 
 - name: Install php extensions
-  package: name="php{{phpfpm_version}}-php-{{ item }}" state=latest
+  package: name="php{{ phpfpm_version }}-php-{{ item }}" state=latest
   with_items: "{{ phpfpm_pkg }}"
 
 - name: Install other packages
