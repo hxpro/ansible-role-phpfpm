@@ -7,9 +7,6 @@
       - phpfpm_pools is defined
     msg: "Please read the role documentation, if you still cannot understand why role failed, add your issue."
 
-- name: Read version specific variables
-  include_vars: "{{ phpfpm_version }}.yml"
-
 - name: php-fpm.d pool
   include_tasks: "{{ role_path }}/tasks/pool.yml"
   with_items: "{{ phpfpm_pools }}"
@@ -17,8 +14,10 @@
     loop_var: pool
 
 - name: php-fpm.conf
-  template: src=php-fpm.conf.j2 dest="{{ phpfpm_etc }}/php-fpm.conf"
-    validate="/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
+  template:
+    src: php-fpm.conf.j2
+    dest: "{{ phpfpm_etc }}/php-fpm.conf"
+    validate: "/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
   notify: restart php-fpm
 
 - name: Customize php.ini
@@ -30,3 +29,7 @@
     state: "{{ item.state | default('present') }}"
   with_items: "{{ phpfpm_ini }}"
   notify: restart php-fpm
+
+- name: Notice
+  debug:
+    msg: "Be sure to have /opt/remi/php{{ phpfpm_version }}/root/usr/bin in your PATH env."

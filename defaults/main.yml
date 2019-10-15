@@ -1,5 +1,6 @@
 ---
 phpfpm_version: 70
+phpfpm_etc: "/etc/opt/remi/php{{ phpfpm_version }}"
 phpfpm_pkg:
   - fpm
   - opcache

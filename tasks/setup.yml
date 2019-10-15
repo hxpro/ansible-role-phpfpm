@@ -1,7 +1,22 @@
 ---
-- name: Install remi-repo
-  package: name=https://rpms.remirepo.net/enterprise/remi-release-7.rpm state=installed
+- name: Install remi-repo for CentOS
+  package:
+    name: "https://rpms.remirepo.net/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm"
+    state: installed
   when: ansible_distribution == 'CentOS'
+
+- name: Install remi-repo for Fedora
+  package:
+    name: "https://rpms.remirepo.net/fedora/remi-release-{{ ansible_distribution_major_version }}.rpm"
+    state: installed
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable remi repo
+  ini_file:
+    path: /etc/yum.repos.d/remi.repo
+    section: remi
+    option: enabled
+    value: "1"
 
 - name: Install php extensions
   package: name="php{{phpfpm_version}}-php-{{ item }}" state=latest

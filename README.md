@@ -10,7 +10,11 @@ This role is under development. Use it on your own risk. Pull requests are welco
 Requirements
 ------------
 
-CentOS
+The ipaddr filter requires python's netaddr be installed on the ansible controller
+
+```bash
+  pip install netaddr
+```
 
 Role Variables
 --------------
@@ -137,11 +141,15 @@ Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
 ```
 - hosts: servers
   roles:
-    - role: hxpro.phpfpm    
+    - role: hxpro.phpfpm
+      vars:
+        phpfpm_version: 74
 ```
+
 License
 -------
 
