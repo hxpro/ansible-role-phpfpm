@@ -13,7 +13,8 @@
     msg: "Check your pool definition."
   when: pool.absent is not defined
 
-- seport:
+- name: Set selinux port where phpfpm listening on
+  seport:
     ports: "{{ pool.listen.address.split(':')[1]|int }}"
     proto: tcp
     setype: http_port_t
