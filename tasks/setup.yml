@@ -46,13 +46,15 @@
     state: directory
     setype: httpd_log_t
 
-- sefcontext:
+- name: Set selinux file context
+  sefcontext:
     target: '{{ phpfpm_log_path }}(/.*)?'
     setype: httpd_log_t
     state: present
   when: selinux|bool
 
-- seboolean:
+- name: Set selinux boolean - allow network connect db
+  seboolean:
     name: httpd_can_network_connect_db
     state: yes
     persistent: yes
