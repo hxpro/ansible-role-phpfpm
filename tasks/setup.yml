@@ -20,13 +20,13 @@
   when: ansible_distribution == 'Fedora'
 
 - name: Install php extensions
-  package: name="php{{ phpfpm_version }}-php-{{ item }}" state=latest
+  package:
+    name: "php{{ phpfpm_version }}-php-{{ item }}"
   with_items: "{{ phpfpm_pkg }}"
 
-- name: Install other packages
-  package: name={{ item }} state=latest
-  with_items:
-    - gettext
+- name: Install gettext
+  package:
+    name: gettext
 
 - name: Composer
   get_url:
