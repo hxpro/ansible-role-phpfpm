@@ -13,13 +13,14 @@ addons:
     - python-pip
 
 install:
-  - sudo pip install ansible
-  - sudo pip install docker-py==1.9.0
+  - pip install --user ansible
+  - pip install --user docker-py==1.9.0
+  - pip install --user molecule
   - ansible-galaxy install hxpro.epel
   - ansible-galaxy install hxpro.selinux
 
 script:
-  - ansible-playbook test.yml
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
