@@ -30,6 +30,13 @@
   with_items: "{{ phpfpm_ini }}"
   notify: restart php-fpm
 
+- name: restart php-fpm
+  systemd:
+    name: "php{{ phpfpm_version }}-php-fpm"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
 - name: Notice
   debug:
     msg: "Be sure to have /opt/remi/php{{ phpfpm_version }}/root/usr/bin in your PATH env."

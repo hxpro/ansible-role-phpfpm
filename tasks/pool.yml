@@ -4,6 +4,7 @@
     path="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
     state=absent
   when: pool.absent is defined
+  notify: restart php-fpm
 
 - name: Check pools variables
   assert:
