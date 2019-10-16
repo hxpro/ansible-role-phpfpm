@@ -13,9 +13,9 @@ addons:
     - python-pip
 
 install:
-  - pip install --user ansible
-  - pip install --user docker-py==1.9.0
-  - pip install --user molecule
+  - pip install ansible
+  - pip install docker-py==1.9.0
+  - pip install molecule
   - ansible-galaxy install hxpro.epel
   - ansible-galaxy install hxpro.selinux
 
