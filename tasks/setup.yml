@@ -17,6 +17,7 @@
     section: remi
     option: enabled
     value: "1"
+  when: ansible_distribution == 'Fedora'
 
 - name: Install php extensions
   package: name="php{{ phpfpm_version }}-php-{{ item }}" state=latest
