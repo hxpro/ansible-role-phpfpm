@@ -18,7 +18,7 @@ install:
   - pip install molecule
   - ansible-galaxy install hxpro.epel
   - ansible-galaxy install hxpro.selinux
-  - mv ansible-role-phpfpm hxpro.phpfpm
+  - mv ../ansible-role-phpfpm ../hxpro.phpfpm
 
 script:
   - molecule test
