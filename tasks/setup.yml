@@ -31,9 +31,10 @@
 
 - name: Composer
   get_url:
-    url: https://getcomposer.org/composer.phar
+    url: "https://getcomposer.org/download/{{ phpfpm_composer_version }}/composer.phar"
     dest: /usr/local/bin/composer
     mode: 0755
+    checksum: "{{ phpfpm_composer_checksum }}"
 
 - name: Home directory for apache user that create php-fpm package
   file:

@@ -19,7 +19,10 @@ The ipaddr filter requires python's netaddr be installed on the ansible controll
 Role Variables
 --------------
 ```
-phpfpm_version: 70
+phpfpm_composer_version: "1.9.1"
+phpfpm_composer_checksum: "sha256:1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111"
+
+phpfpm_version: 74
 phpfpm_pkg:
   - fpm
   - opcache
@@ -29,7 +32,6 @@ phpfpm_pkg:
   - mysqlnd
   - gd
   - pear
-  - mcrypt
   - soap
   - mbstring
   - pdo

@@ -16,7 +16,7 @@ def test_hosts_file(host):
 
 
 def test_phpfpm_running_and_enabled(host):
-    phpfpm = host.service("php70-php-fpm")
+    phpfpm = host.service("php74-php-fpm")
     assert phpfpm.is_running
     assert phpfpm.is_enabled
 
