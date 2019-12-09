@@ -87,7 +87,8 @@ phpfpm_pools:
 
     env:
       HOSTNAME: "$HOSTNAME"
-      PATH: "/usr/local/bin:/usr/bin:/bin"
+      PATH: "/opt/remi/php{{ phpfpm_version }}/root/usr/bin:/usr/local/bin:/usr/bin:/bin"
+      LD_LIBRARY_PATH: "/opt/remi/php{{ phpfpm_version }}/root/usr/lib64"
       TMP: "/tmp"
       TEMP: "/tmp"
       TMPDIR: "/tmp"
