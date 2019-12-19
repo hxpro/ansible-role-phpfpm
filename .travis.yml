@@ -2,7 +2,6 @@
 language: python
 python:
   - "3.7"
-  - "3.6"
   - "2.7"
 
 services:
@@ -14,12 +13,7 @@ addons:
     - python-pip
 
 install:
-  - pip install ansible
-  - pip install docker-py==1.9.0
-  - pip install molecule
-  - ansible-galaxy install hxpro.epel
-  - ansible-galaxy install hxpro.selinux
-  - mv ../ansible-role-phpfpm ../hxpro.phpfpm
+  - pip install ansible molecule[docker]
 
 script:
   - molecule test
