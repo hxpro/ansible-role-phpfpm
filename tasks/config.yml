@@ -33,9 +33,9 @@
 - name: restart php-fpm
   systemd:
     name: "php{{ phpfpm_version }}-php-fpm"
-    enabled: yes
+    enabled: true
     state: started
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: Notice
   debug:
