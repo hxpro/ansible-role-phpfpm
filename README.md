@@ -124,16 +124,16 @@ phpfpm_pools:
 
     php_value:
       session.save_handler: files
-      session.save_path: "/var/lib/php/session"
-      soap.wsdl_cache_dir: "/var/lib/php/wsdlcache"
-      opcache.file_cache: "/var/lib/php/opcache"
+      session.save_path: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/session"
+      soap.wsdl_cache_dir: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/wsdlcache"
+      opcache.file_cache: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/opcache"
 
 ```
 
 Known Issues
 ------------
 
- - Folders /var/lib/php/{opcache,session,wsdlcache} are installed by php-fpm rpm package and them group is set to apache. Do not use this default paths if you would not use group apache.
+ - Folders /var/opt/remi/php{{ phpfpm_version }}/lib/php/{opcache,session,wsdlcache} are installed by php-fpm rpm package and them group is set to apache. Do not use this default paths if you would not use group apache.
 
 Dependencies
 ------------

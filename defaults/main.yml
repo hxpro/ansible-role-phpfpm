@@ -99,6 +99,6 @@ phpfpm_pools:
 
     php_value:
       session.save_handler: files
-      session.save_path: "/var/lib/php/session"
-      soap.wsdl_cache_dir: "/var/lib/php/wsdlcache"
-      opcache.file_cache: "/var/lib/php/opcache"
+      session.save_path: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/session"
+      soap.wsdl_cache_dir: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/wsdlcache"
+      opcache.file_cache: "/var/opt/remi/php{{ phpfpm_version }}/lib/php/opcache"
