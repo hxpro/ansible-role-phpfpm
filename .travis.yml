@@ -13,7 +13,7 @@ addons:
     - python-pip
 
 install:
-  - pip install ansible molecule[docker]
+  - pip install ansible molecule[docker] testinfra
 
 script:
   - molecule test
