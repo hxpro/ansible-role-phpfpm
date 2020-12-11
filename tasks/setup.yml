@@ -1,4 +1,11 @@
 ---
+- name: Import REMI gpgkey
+  rpm_key:
+    state: present
+    key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi2018"
+    fingerprint: "6B38 FEA7 231F 87F5 2B9C  A9D8 5550 9759 5F11 735A"
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
+
 - name: Install remi-repo for CentOS
   package:
     name: "https://rpms.remirepo.net/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm"
@@ -17,6 +24,7 @@
     section: remi
     option: enabled
     value: "1"
+    mode: "0644"
   when: ansible_distribution == 'Fedora'
 
 - name: Install php extensions
@@ -33,7 +41,7 @@
   get_url:
     url: "https://getcomposer.org/download/{{ phpfpm_composer_version }}/composer.phar"
     dest: /usr/local/bin/composer
-    mode: 0755
+    mode: "0755"
     checksum: "{{ phpfpm_composer_checksum }}"
 
 - name: Home directory for apache user that create php-fpm package
@@ -41,6 +49,7 @@
     name: /usr/share/httpd
     owner: "{{ phpfpm_user }}"
     group: "{{ phpfpm_group }}"
+    mode: "0755"
     state: directory
 
 - name: Log directory
@@ -48,6 +57,7 @@
     name: "{{ phpfpm_log_path }}"
     state: directory
     setype: httpd_log_t
+    mode: "0755"
 
 - name: Set selinux file context
   sefcontext:

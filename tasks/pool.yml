@@ -1,8 +1,8 @@
 ---
 - name: Delete pool
   file:
-    path="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
-    state=absent
+    path: "{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
+    state: absent
   when: pool.absent is defined
   notify: restart php-fpm
 
@@ -24,10 +24,11 @@
 
 - name: "Configuration for php-fpm pool {{ pool.name }}"
   template:
-    owner={{ phpfpm_user }}
-    group={{ phpfpm_group }}
-    src="pool.conf.j2"
-    dest="{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
+    owner: "{{ phpfpm_user }}"
+    group: "{{ phpfpm_group }}"
+    src: "pool.conf.j2"
+    dest: "{{ phpfpm_etc }}/php-fpm.d/{{ pool.name }}.conf"
+    mode: "0644"
   when: pool.absent is not defined
   notify: restart php-fpm
 

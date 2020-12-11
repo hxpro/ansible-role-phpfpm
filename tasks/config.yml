@@ -17,6 +17,7 @@
   template:
     src: php-fpm.conf.j2
     dest: "{{ phpfpm_etc }}/php-fpm.conf"
+    mode: "0644"
     validate: "/opt/remi/php{{ phpfpm_version }}/root/usr/sbin/php-fpm -t -c %s"
   notify: restart php-fpm
 
@@ -27,6 +28,7 @@
     option: "{{ item.option }}"
     value: "{{ item.value }}"
     state: "{{ item.state | default('present') }}"
+    mode: "0644"
   with_items: "{{ phpfpm_ini }}"
   notify: restart php-fpm
 

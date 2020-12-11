@@ -1,6 +1,7 @@
 galaxy_info:
   author: Matěj Koudelka
-  description: Install and configure php-fpm from remi repository. Tested on CentOS 7 and Fedora 30.
+  role_name: phpfpm
+  description: Install and configure php-fpm from remi repository. Tested on CentOS 7 and CentOS 8.
 
   license: license (WTFPL)
 
@@ -10,9 +11,7 @@ galaxy_info:
     - name: EL
       versions:
         - 7
-    - name: Fedora
-      versions:
-        - 30
+        - 8
 
   galaxy_tags: []
 
