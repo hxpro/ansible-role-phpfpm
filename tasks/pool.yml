@@ -20,7 +20,7 @@
     proto: tcp
     setype: http_port_t
     state: "{{ 'present' if pool.absent is not defined else 'absent' }}"
-  when: selinux and pool.absent is not defined and pool.listen.address.split(':')[0] | ipaddr
+  when: selinux and pool.absent is not defined and pool.listen.address.split(':')[0] | ansible.utils.ipaddr
 
 - name: "Configuration for php-fpm pool {{ pool.name }}"
   template:
