@@ -6,6 +6,7 @@ phpfpm_supported_versions:
   - 72
   - 73
   - 74
+  - 81
 
 phpfpm_allowed_log_levels:
   - alert
